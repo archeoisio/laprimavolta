@@ -1201,15 +1201,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (map) map.closePopup();
 
-            // Esegue il reset delle dimensioni della mappa e torna alla vista iniziale
+            // Esegue il reset delle dimensioni della mappa e torna alla vista iniziale identica all'avvio
             const isMobileDevice = window.innerWidth < 768;
             if (isMobileDevice) {
                 map.setView([40.630, 14.805], 11.75, { animate: true });
             } else {
-                map.fitBounds(initialBounds, { padding: [20, 20], animate: true });
-                if (map.getZoom() < 13) {
-                    map.setZoom(13);
-                }
+                map.fitBounds(initialBounds, { animate: true });
             }
 
             // Aggiorna lo stato del pannello di controllo se necessario
