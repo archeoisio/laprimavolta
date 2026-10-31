@@ -1171,7 +1171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnControl = L.control({ position: 'topright' });
     btnControl.onAdd = function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar');
-        container.style.marginTop = '4px'; container.style.marginRight = '10px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
+        container.style.marginTop = '4px'; container.style.marginRight = '1px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
         L.DomEvent.disableClickPropagation(container);
         L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
         L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
