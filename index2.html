@@ -77,5 +77,15 @@
 
   <!-- 4. Il tuo file di script personalizzato (es. laprimavolta.js) -->
   <script src="laprimavolta.js"></script>
+<script>
+    // Taglia il titolo della scheda del browser prendendo solo la parte prima del simbolo "|"
+    document.addEventListener("DOMContentLoaded", function() {
+        const fullTitle = document.title;
+        if (fullTitle.includes("|")) {
+            document.title = fullTitle.split("|")[0].trim();
+        }
+    });
+</script>
+
 </body>
 </html>
