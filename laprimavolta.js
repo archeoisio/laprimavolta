@@ -1256,66 +1256,53 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', setVh);
 
    map.on('locationfound', function(e) {
-    var radius = e.accuracy / 2;
-    
-    // Se l'accuratezza è pessima (es. da desktop/IP con raggio enorme), evitiamo il cerchio gigante
-    if (e.accuracy > 30000) {
-        L.marker(e.latlng).addTo(map)
-            .bindPopup("Posizione approssimativa stimata da rete").openPopup();
-    } else {
-        // --- EFFETTO PUNTO AZZURRO STILE GOOGLE ---
+        var radius = e.accuracy / 2;
         
-        // 1. Il cerchio di accuratezza sfumato (trasparente)
-        L.circle(e.latlng, radius, {
-            color: '#1a73e8',      // Bordo blu Google
-            fillColor: '#1a73e8',  // Riempimento blu
-            fillOpacity: 0.15,     // Molto trasparente come l'area di precisione
-            weight: 1,
-            interactive: false     // Evita che blocchi i click sotto
-        }).addTo(map);
+        // Se l'accuratezza è pessima (es. da desktop/IP con raggio enorme), evitiamo il cerchio gigante
+        if (e.accuracy > 30000) {
+            L.marker(e.latlng).addTo(map)
+                .bindPopup("Posizione approssimativa stimata da rete").openPopup();
+        } else {
+            // --- EFFETTO PUNTO AZZURRO STILE GOOGLE ---
+            
+            // 1. Il cerchio di accuratezza sfumato (trasparente)
+            L.circle(e.latlng, radius, {
+                color: '#1a73e8',      // Bordo blu Google
+                fillColor: '#1a73e8',  // Riempimento blu
+                fillOpacity: 0.15,     // Molto trasparente come l'area di precisione
+                weight: 1,
+                interactive: false     // Evita che blocchi i click sotto
+            }).addTo(map);
 
-        // 2. Il puntino centrale azzurro con bordo bianco (stile GPS)
-        L.circleMarker(e.latlng, {
-            radius: 8,             // Dimensione del puntino centrale
-            color: '#ffffff',      // Bordo bianco per staccare dalla mappa
-            fillColor: '#1a73e8',  // Colore blu Google
-            fillOpacity: 1,
-            weight: 3              // <-- Rimosso il carattere anomalo qui
-        }).addTo(map)
-          .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)").openPopup();
-        
-        // Centriamo la mappa sulla posizione trovata con uno zoom adeguato
-        map.setView(e.latlng, 15);
-    }
-});
+            // 2. Il puntino centrale azzurro con bordo bianco (stile GPS)
+            L.circleMarker(e.latlng, {
+                radius: 8,             // Dimensione del puntino centrale
+                color: '#ffffff',      // Bordo bianco per staccare dalla mappa
+                fillColor: '#1a73e8',  // Colore blu Google
+                fillOpacity: 1,
+                weight: 3
+            }).addTo(map)
+              .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)"); // Senza .openPopup automatico
+            
+            // Centriamo la mappa sulla posizione trovata con uno zoom adeguato
+            map.setView(e.latlng, 15);
+        }
+    });
 
-map.on('locationerror', function(e) { 
-    alert("Impossibile determinare la posizione: " + e.message); 
-});
-
-const btnControl = L.control({ position: 'topleft' });
-btnControl.onAdd = function(map) {
-    const container = L.DomUtil.create('div', 'leaflet-bar');
-    container.style.marginTop = '0px'; 
-    container.style.marginRight = '0px'; 
-    container.style.display = 'flex'; 
-    container.style.flexDirection = 'row'; 
-    container.style.background = 'transparent'; 
-    container.style.border = 'none';
-    
-    L.DomEvent.disableClickPropagation(container);
-    L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
-    L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
-    L.DomEvent.on(container, 'pointerdown', L.DomEvent.stopPropagation);
-    
-    return container;
-};
-    map.on('locationerror', function(e) { alert("Impossibile determinare la posizione: " + e.message); });
+    map.on('locationerror', function(e) { 
+        alert("Impossibile determinare la posizione: " + e.message); 
+    });
 
     const btnControl = L.control({ position: 'topleft' });
     btnControl.onAdd = function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar');
-        container.style.marginTop = '0px'; container.style.marginRight = '0px'; container.style.display = 'flex'; container.style.flexDirection = 'row'; container.style.background = 'transparent'; container.style.border = 'none';
+        container.style.marginTop = '0px'; 
+        container.style.marginRight = '0px'; 
+        container.style.display = 'flex'; 
+        container.style.flexDirection = 'row'; 
+        container.style.background = 'transparent'; 
+        container.style.border = 'none';
+        
         L.DomEvent.disableClickPropagation(container);
         L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
         L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
@@ -1338,32 +1325,28 @@ btnControl.onAdd = function(map) {
             btn.style.color = '#333'; 
             btn.style.borderBottom = '1px solid #ccc'; 
             btn.style.textDecoration = 'none';
-            btn.style.border = '1px solid #b0b0b0';        // Bordo/cornice grigia ben definita
-            btn.style.borderRadius = '4px';                // Angoli leggermente arrotondati (metti 0px se li vuoi squadrati)
-            btn.style.boxShadow = '0 1px 3px rgba(0,0,0,0.15)'; // Leggera ombra propria per staccarlo dalla mappa
+            btn.style.border = '1px solid #b0b0b0';        
+            btn.style.borderRadius = '4px';                
+            btn.style.boxShadow = '0 1px 3px rgba(0,0,0,0.15)'; 
             
             L.DomEvent.on(btn, 'click', e => { L.DomEvent.stopPropagation(e); L.DomEvent.preventDefault(e); onClick(); });
             return btn;
         };
 
-       // Pulsante Home 🌍
+        // Pulsante Home 🌍
         createBtn('🌍', "Torna alla vista iniziale", () => {
-            // Chiude il Centro di Controllo (rimuovendo la classe 'open')
             const bottomPanel = document.getElementById('custom-bottom-panel');
             if (bottomPanel) bottomPanel.classList.remove('open');
 
-            // Chiude il pannello dei dettagli elemento
             const detailPanel = document.getElementById('feature-detail-panel');
             if (detailPanel) detailPanel.style.display = 'none';
 
-            // Deseleziona il layer attivo e ripristina lo stile se c'è una selezione
             if (selectedLayer) {
                 resetFeatureStyle({ target: selectedLayer });
                 selectedLayer = null;
             }
             if (map) map.closePopup();
 
-            // Esegue il reset delle dimensioni della mappa e torna alla vista iniziale identica all'avvio
             const isMobileDevice = window.innerWidth < 768;
             if (isMobileDevice) {
                 map.setView([40.630, 14.805], 11.75, { animate: true });
@@ -1371,14 +1354,15 @@ btnControl.onAdd = function(map) {
                 map.fitBounds(initialBounds, { animate: true });
             }
 
-            // Aggiorna lo stato del pannello di controllo se necessario
             if (typeof renderPanelContent === 'function') {
                 renderPanelContent();
             }
         }, 'btn-tutorial-home');
 
+        // Pulsante Posizione 📍
         createBtn('📍', "Posizione", () => { map.locate({setView: true, maxZoom: 16}); }, 'btn-tutorial-locate');
 
+        // Pulsante Cerca 🔍
         createBtn('🔍', "Cerca indirizzo a Salerno", () => {
             const box = document.getElementById('search-box-container');
             if (box.style.display === 'flex') {
