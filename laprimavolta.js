@@ -113,7 +113,7 @@ customStyleTag.innerHTML = `
 
         #custom-bottom-panel:not(.open) {
             position: fixed !important;
-            top: 20px !important;
+            top: 0px !important;
             left: 0px !important;
             bottom: auto !important;
             transform: none !important;
