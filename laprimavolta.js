@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 onEachFeature: function(feature, layer) {
                     layer_comuniprovincia.addLayer(layer);
 
-                    const nomeComune = feature.properties['COMUNE'] || feature.properties['Comune'] || '';
+                    const nomeComune = feature.properties['Name'] || feature.properties['NAME'] || '';
                     
                     if (nomeComune) {
                         layer.on('click', function(e) {
