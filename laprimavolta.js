@@ -1193,7 +1193,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const createBtn = (html, title, onClick, className) => {
             const btn = L.DomUtil.create('a', className || '', container);
-            btn.innerHTML = html; btn.title = title; btn.href = '#'; btn.style.width = '30px'; btn.style.height = '30x'; btn.style.lineHeight = '30px'; btn.style.textAlign = 'center'; btn.style.display = 'flex'; btn.style.alignItems = 'center'; btn.style.justifyContent = 'center'; btn.style.fontSize = '18px'; btn.style.backgroundColor = 'white'; btn.style.color = '#333'; btn.style.borderBottom = '1px solid #ccc'; btn.style.textDecoration = 'none';
+            btn.innerHTML = html; 
+            btn.title = title; 
+            btn.href = '#'; 
+            btn.style.width = '30px'; 
+            btn.style.height = '30px'; 
+            btn.style.lineHeight = '30px'; 
+            btn.style.textAlign = 'center'; 
+            btn.style.display = 'flex'; 
+            btn.style.alignItems = 'center'; 
+            btn.style.justifyContent = 'center'; 
+            btn.style.fontSize = '18px'; 
+            btn.style.backgroundColor = 'white'; 
+            btn.style.color = '#333'; 
+            btn.style.borderBottom = '1px solid #ccc'; 
+            btn.style.textDecoration = 'none';
+            btn.style.border = '1px solid #b0b0b0';        // Bordo/cornice grigia ben definita
+            btn.style.borderRadius = '4px';                // Angoli leggermente arrotondati (metti 0px se li vuoi squadrati)
+            btn.style.boxShadow = '0 1px 3px rgba(0,0,0,0.15)'; // Leggera ombra propria per staccarlo dalla mappa
+            
             L.DomEvent.on(btn, 'click', e => { L.DomEvent.stopPropagation(e); L.DomEvent.preventDefault(e); onClick(); });
             return btn;
         };
