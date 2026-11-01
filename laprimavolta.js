@@ -1117,14 +1117,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [20, 20],
                             paddingBottomRight: [20, 280],
-                            maxZoom: 18,
+                            maxZoom: 19,
                             animate: false
                         });
                     } else {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [50, 50],
                             paddingBottomRight: [50, 180],
-                            maxZoom: 18,
+                            maxZoom: 19,
                             animate: false
                         });
                         // Centra il poligono nella parte destra dello schermo su desktop
