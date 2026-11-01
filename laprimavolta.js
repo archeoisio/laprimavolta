@@ -35,8 +35,8 @@ customStyleTag.innerHTML = `
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
-        margin-top: 1px !important;  /* Distanza dal bordo superiore */
-        margin-right: 1px !important;
+        margin-top: 5px !important;  /* Distanza dal bordo superiore */
+        margin-right: 5px !important;
     }
 
     #map-custom-logo {
@@ -957,7 +957,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 50);
                 }
             ">
-                <b style="font-size:12px; color:#2c3e50;">🗂️ Centro di Controllo</b>
+                <b style="font-size:12px; color:#2c3e50;">🗂️ Pannello di controllo</b>
                 <div style="display:flex; align-items:center; gap:8px;">
                     <span style="font-size:12px; font-weight:bold; color:#3498db; padding:0 4px;">${arrowSymbol}</span>
                 </div>
@@ -1052,7 +1052,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }, 50);
                     }
                 ">
-                    <b style="font-size:12px; color:#2c3e50;">🗂️ Centro di Controllo</b>
+                    <b style="font-size:12px; color:#2c3e50;">🗂️ Pannello di controllo</b>
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span style="font-size:14px; font-weight:bold; color:#3498db; padding:0 4px;">${arrowSymbol}</span>
                     </div>
