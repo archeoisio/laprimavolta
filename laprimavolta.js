@@ -549,7 +549,7 @@ window.changeDetailSlide = function(targetSlide) {
 };
 
 const initialBounds = [
-    [40.6269, 14.771],
+    [40.6269, 14.801],
     [40.7269, 14.873]
 ];
 
