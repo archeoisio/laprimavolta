@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkZoomVisibility();
 
-    let searchMarker = null;
+   let searchMarker = null;
 
     map.on('click', () => {
         if (selectedLayer) {
@@ -792,6 +792,10 @@ document.addEventListener('DOMContentLoaded', () => {
             map.removeLayer(searchMarker);
             searchMarker = null;
         }
+
+        // Svuota l'input se l'utente clicca sulla mappa
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) searchInput.value = '';
     });
 
     const bottomPanel = document.createElement('div');
@@ -810,6 +814,16 @@ document.addEventListener('DOMContentLoaded', () => {
         <span id="search-close" title="Chiudi">✕</span>
     `;
     document.body.appendChild(searchBoxContainer);
+
+    // --- AGGIUNTO: Gestione pulizia automatica alla chiusura tramite la crocetta ---
+    document.getElementById('search-close').addEventListener('click', () => {
+        searchBoxContainer.style.display = 'none';
+        document.getElementById('search-input').value = ''; // Pulisce la casella
+        if (searchMarker) {
+            map.removeLayer(searchMarker);
+            searchMarker = null;
+        }
+    });
 
     function executeSearch() {
         const query = document.getElementById('search-input').value.trim();
