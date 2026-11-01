@@ -40,7 +40,7 @@ customStyleTag.innerHTML = `
     }
 
     #map-custom-logo {
-        width: 110px; /* Puoi aumentare o diminuire i pixel a seconda di come preferisci la grandezza */
+        width: 70px; /* Puoi aumentare o diminuire i pixel a seconda di come preferisci la grandezza */
         height: auto;
         display: block;
         border: none;
