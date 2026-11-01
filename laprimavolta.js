@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
    if (isMobileDevice) {
-        map.setView([40.610, 14.805], 11.75);
+        map.setView([40.650, 14.805], 11.75);
     } else {
         map.fitBounds(initialBounds);
         if (map.getZoom() < 13) {
