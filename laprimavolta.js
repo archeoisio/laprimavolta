@@ -1116,15 +1116,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (checkMobile) {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [20, 20],
-                            paddingBottomRight: [20, 260],
-                            maxZoom: 20,
+                            paddingBottomRight: [20, 280],
+                            maxZoom: 18,
                             animate: false
                         });
                     } else {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [50, 50],
                             paddingBottomRight: [50, 180],
-                            maxZoom: 20,
+                            maxZoom: 18,
                             animate: false
                         });
                         // Centra il poligono nella parte destra dello schermo su desktop
