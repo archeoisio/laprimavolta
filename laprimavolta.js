@@ -1255,11 +1255,61 @@ document.addEventListener('DOMContentLoaded', () => {
     setVh();
     window.addEventListener('resize', setVh);
 
-    map.on('locationfound', function(e) {
-        var radius = e.accuracy / 2;
-        L.marker(e.latlng).addTo(map).bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)").openPopup();
-        L.circle(e.latlng, radius).addTo(map);
-    });
+   map.on('locationfound', function(e) {
+    var radius = e.accuracy / 2;
+    
+    // Se l'accuratezza è pessima (es. da desktop/IP con raggio enorme), evitiamo il cerchio gigante
+    if (e.accuracy > 30000) {
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("Posizione approssimativa stimata da rete").openPopup();
+    } else {
+        // --- EFFETTO PUNTO AZZURRO STILE GOOGLE ---
+        
+        // 1. Il cerchio di accuratezza sfumato (trasparente)
+        L.circle(e.latlng, radius, {
+            color: '#1a73e8',      // Bordo blu Google
+            fillColor: '#1a73e8',  // Riempimento blu
+            fillOpacity: 0.15,     // Molto trasparente come l'area di precisione
+            weight: 1,
+            interactive: false     // Evita che blocchi i click sotto
+        }).addTo(map);
+
+        // 2. Il puntino centrale azzurro con bordo bianco (stile GPS)
+        L.circleMarker(e.latlng, {
+            radius: 8,             // Dimensione del puntino centrale
+            color: '#ffffff',      // Bordo bianco per staccare dalla mappa
+            fillColor: '#1a73e8',  // Colore blu Google
+            fillOpacity: 1,
+            weight: 3              توافق
+        }).addTo(map)
+          .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)").openPopup();
+        
+        // Centriamo la mappa sulla posizione trovata con uno zoom adeguato
+        map.setView(e.latlng, 15);
+    }
+});
+
+map.on('locationerror', function(e) { 
+    alert("Impossibile determinare la posizione: " + e.message); 
+});
+
+const btnControl = L.control({ position: 'topleft' });
+btnControl.onAdd = function(map) {
+    const container = L.DomUtil.create('div', 'leaflet-bar');
+    container.style.marginTop = '0px'; 
+    container.style.marginRight = '0px'; 
+    container.style.display = 'flex'; 
+    container.style.flexDirection = 'row'; 
+    container.style.background = 'transparent'; 
+    container.style.border = 'none';
+    
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
+    L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
+    L.DomEvent.on(container, 'pointerdown', L.DomEvent.stopPropagation);
+    
+    return container;
+};
     map.on('locationerror', function(e) { alert("Impossibile determinare la posizione: " + e.message); });
 
     const btnControl = L.control({ position: 'topleft' });
