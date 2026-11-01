@@ -289,8 +289,8 @@ customStyleTag.innerHTML = `
     /* Stile per il box di ricerca indirizzi */
     #search-box-container {
         position: fixed;
-        top: 20px;
-        right: 70px;
+        top: 0px;
+        right: 0x;
         background: white;
         padding: 6px 10px;
         border-radius: 8px;
@@ -1171,7 +1171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnControl = L.control({ position: 'topright' });
     btnControl.onAdd = function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar');
-        container.style.marginTop = '4px'; container.style.marginRight = '1px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
+        container.style.marginTop = '0px'; container.style.marginRight = '0px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
         L.DomEvent.disableClickPropagation(container);
         L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
         L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
@@ -1179,7 +1179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const createBtn = (html, title, onClick, className) => {
             const btn = L.DomUtil.create('a', className || '', container);
-            btn.innerHTML = html; btn.title = title; btn.href = '#'; btn.style.width = '44px'; btn.style.height = '44px'; btn.style.lineHeight = '44px'; btn.style.textAlign = 'center'; btn.style.display = 'flex'; btn.style.alignItems = 'center'; btn.style.justifyContent = 'center'; btn.style.fontSize = '18px'; btn.style.backgroundColor = 'white'; btn.style.color = '#333'; btn.style.borderBottom = '1px solid #ccc'; btn.style.textDecoration = 'none';
+            btn.innerHTML = html; btn.title = title; btn.href = '#'; btn.style.width = '30px'; btn.style.height = '30x'; btn.style.lineHeight = '30px'; btn.style.textAlign = 'center'; btn.style.display = 'flex'; btn.style.alignItems = 'center'; btn.style.justifyContent = 'center'; btn.style.fontSize = '18px'; btn.style.backgroundColor = 'white'; btn.style.color = '#333'; btn.style.borderBottom = '1px solid #ccc'; btn.style.textDecoration = 'none';
             L.DomEvent.on(btn, 'click', e => { L.DomEvent.stopPropagation(e); L.DomEvent.preventDefault(e); onClick(); });
             return btn;
         };
