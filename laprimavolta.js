@@ -26,7 +26,7 @@ customStyleTag.innerHTML = `
         width: 100vw !important;
         height: 100vh !important;
         margin: 0 !important;
-        padding: 0 !important;
+        : 0 !important;
     }
 
     * {
@@ -58,8 +58,8 @@ customStyleTag.innerHTML = `
         position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); 
         width: 100%; max-width: 1000px; max-height: 225px; 
         background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); 
-        box-shadow: 0 -5px 25px rgba(0,0,0,0.3); transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; 
-        z-index: 2000; padding: 10px 12px; box-sizing: border-box; text-align: left; 
+        box-shadow: 0 -5px 25px rgba(0,0,0,0.3); transition: max-height 0.3s ease-in-out,  0.3s ease-in-out; 
+        z-index: 2000; : 10px 12px; box-sizing: border-box; text-align: left; 
         font-family: sans-serif; font-size: 12px; color: #333; 
         border-top-left-radius: 14px; border-top-right-radius: 14px; 
         border: 1px solid rgba(0,0,0,0.1); display: flex; flex-direction: column; 
@@ -68,7 +68,7 @@ customStyleTag.innerHTML = `
     #custom-bottom-panel:not(.open) {
         max-height: 44px !important;
         overflow: hidden !important;
-        padding: 10px 12px !important;
+        : 10px 12px !important;
     }
 
     #custom-bottom-panel:not(.open) .mobile-content-container {
@@ -78,7 +78,7 @@ customStyleTag.innerHTML = `
     .comune-label {
         background: #ffffff;
         border: 1px solid #333333;
-        padding: 3px 7px;
+        : 3px 7px;
         font-weight: bold;
         font-size: 10px;
         text-transform: uppercase;
@@ -103,7 +103,7 @@ customStyleTag.innerHTML = `
             width: 600px !important;
             height: 260px !important;
             max-height: 260px !important;
-            padding: 10px 12px;
+            : 10px 12px;
             display: flex;
             flex-direction: column;
             z-index: 2000;
@@ -113,7 +113,7 @@ customStyleTag.innerHTML = `
             border-radius: 12px;
             border: 1px solid rgba(0,0,0,0.1);
             box-sizing: border-box;
-            transition: max-height 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out;
+            transition: max-height 0.3s ease-in-out, width 0.3s ease-in-out,  0.3s ease-in-out;
         }
 
         #custom-bottom-panel:not(.open) {
@@ -126,7 +126,7 @@ customStyleTag.innerHTML = `
             height: 36px !important;
             max-height: 36px !important;
             border-radius: 8px !important;
-            padding: 4px 12px !important;
+            : 4px 12px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -143,7 +143,7 @@ customStyleTag.innerHTML = `
             justify-content: space-between !important;
             height: 100% !important;
             width: 100% !important;
-            padding: 0 !important;
+            : 0 !important;
             margin: 0 !important;
             border: none !important;
             position: relative !important;
@@ -152,13 +152,13 @@ customStyleTag.innerHTML = `
         #custom-bottom-panel:not(.open) .panel-main-header b {
             font-size: 14px !important;
             color: #2c3e50 !important;
-            padding: 0 !important;
+            : 0 !important;
             white-space: nowrap;
         }
 /* Dimensione del font quando il pannello è APERTO su desktop */
         #custom-bottom-panel.open .panel-main-header b {
             font-size: 14px !important;
-            padding: 0 !important;
+            : 0 !important;
         }
         #custom-bottom-panel:not(.open) .panel-main-header div {
             display: flex !important;
@@ -195,7 +195,7 @@ customStyleTag.innerHTML = `
             backdrop-filter: blur(10px);
             box-shadow: none !important; 
             z-index: 2100;
-            padding: 10px 12px; 
+            : 10px 12px; 
             box-sizing: border-box; 
             font-family: sans-serif;
             font-size: 14px; 
@@ -212,7 +212,7 @@ customStyleTag.innerHTML = `
             width: 100%; max-width: 1000px; height: 225px !important;
             background: rgba(255, 255, 259, 0.99); backdrop-filter: blur(10px);
             box-shadow: 0 -5px 25px rgba(0,0,0,0.4); z-index: 2100;
-            padding: 10px 14px; box-sizing: border-box; font-family: sans-serif;
+            : 10px 14px; box-sizing: border-box; font-family: sans-serif;
             font-size: 12px; color: #333; display: none; flex-direction: column;
             border-top-left-radius: 14px; border-top-right-radius: 14px;
             border: 1px solid rgba(0,0,0,0.1);
@@ -223,15 +223,15 @@ customStyleTag.innerHTML = `
 
     #custom-bottom-panel:not(.open) .desktop-main-container { display: none !important; }
     
-    .panel-main-header { flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; padding-bottom: 4px; border-bottom: 1px solid #e1e1e1; margin-bottom: 4px; cursor: pointer; user-select: none; width: 100%; position: relative; z-index: 2005; }
-    #custom-bottom-panel:not(.open) .panel-main-header { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .panel-main-header { flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; -bottom: 4px; border-bottom: 1px solid #e1e1e1; margin-bottom: 4px; cursor: pointer; user-select: none; width: 100%; position: relative; z-index: 2005; }
+    #custom-bottom-panel:not(.open) .panel-main-header { border-bottom: none; margin-bottom: 0; -bottom: 0; }
 
     .sub-section-title { font-weight: bold; color: #555; margin-bottom: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sidebar-tab-btn { background: #f1f2f6; border: 1px solid #dcdde1; border-radius: 4px; padding: 4px 6px; font-size: 11px; cursor: pointer; font-weight: bold; color: #57606f; text-align: left; transition: all 0.2s ease; touch-action: manipulation; }
+    .sidebar-tab-btn { background: #f1f2f6; border: 1px solid #dcdde1; border-radius: 4px; : 4px 6px; font-size: 11px; cursor: pointer; font-weight: bold; color: #57606f; text-align: left; transition: all 0.2s ease; touch-action: manipulation; }
     .sidebar-tab-content { display: none; flex-direction: column; flex-grow: 1; overflow: hidden; height: 100%; }
     .sidebar-tab-content.active { display: flex; }
     
-    .panel-scrollable-grid { flex-grow: 1; overflow-x: auto; overflow-y: hidden; display: flex; gap: 8px; padding-bottom: 4px; align-items: flex-start; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; }
+    .panel-scrollable-grid { flex-grow: 1; overflow-x: auto; overflow-y: hidden; display: flex; gap: 8px; -bottom: 4px; align-items: flex-start; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; }
     .feature-vertical-column { display: flex; flex-direction: column; gap: 3px; min-width: 140px; flex-shrink: 0; }
     
     .feature-detail-header {
@@ -239,7 +239,7 @@ customStyleTag.innerHTML = `
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid #e1e1e1;
-        padding-bottom: 4px;
+        -bottom: 4px;
         margin-bottom: 4px;
     }
 
@@ -273,7 +273,7 @@ customStyleTag.innerHTML = `
     }
 
     .detail-table th, .detail-table td {
-        padding: 5px 4px;
+        : 5px 4px;
         text-align: left;
         vertical-align: top;
     }
@@ -299,7 +299,7 @@ customStyleTag.innerHTML = `
         height: 36px;          /* <--- Forza l'altezza precisa a 36px */
         box-sizing: border-box;
         background: white;
-        padding: 4px 8px;
+        : 4px 8px;
         border-radius: 6px;
         box-shadow: none;
         z-index: 3000;
@@ -312,7 +312,7 @@ customStyleTag.innerHTML = `
     #search-input {
         border: 1px solid #ccc;
         border-radius: 4px;
-        padding: 5px 8px;
+        : 5px 8px;
         font-size: 12px;
         width: 220px; /* Larghezza ideale su desktop */
         outline: none;
@@ -323,7 +323,7 @@ customStyleTag.innerHTML = `
         color: white;
         border: none;
         border-radius: 4px;
-        padding: 5px 8px;
+        : 5px 8px;
         font-size: 12px;
         cursor: pointer;
         font-weight: bold;
@@ -522,7 +522,7 @@ window.renderDetailSlide = function() {
     let navControls = '';
     if (totalPages > 1) {
         navControls = `
-            <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:auto; padding-top:2px;">
+            <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:auto; -top:2px;">
                 <span ${leftAction} title="Pagina precedente" style="${leftArrowStyle} font-size:12px;">⬅️</span>
                 <span style="font-size:11px; color:#666; font-weight:normal;">${slide}/${totalPages}</span>
                 <span ${rightAction} title="Pagina successiva" style="${rightArrowStyle} font-size:12px;">➡️</span>
@@ -911,7 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ">
                 <b style="font-size:12px; color:#2c3e50;">🗂️ Centro di Controllo</b>
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:12px; font-weight:bold; color:#3498db; padding:0 4px;">${arrowSymbol}</span>
+                    <span style="font-size:12px; font-weight:bold; color:#3498db; :0 4px;">${arrowSymbol}</span>
                 </div>
             </div>
         `;
@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkMobile) {
             // ==================== LAYOUT MOBILE ====================
             html += `
-                <div style="display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e1e1e1; padding-bottom: 5px; margin-bottom: 2px; flex-shrink: 0; width: 100%; box-sizing: border-box;">
+                <div style="display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e1e1e1; -bottom: 5px; margin-bottom: 2px; flex-shrink: 0; width: 100%; box-sizing: border-box;">
                     
                     <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0; white-space: nowrap;">
                         <span class="sub-section-title" style="margin:0; font-size:11px;">Base Map:</span>
@@ -942,7 +942,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div style="display: flex; align-items: center; gap: 6px; flex-grow: 1; min-width: 0;">
                         <span class="sub-section-title" style="margin:0; flex-shrink:0; font-size:11px;">Altro:</span>
-                        <div style="display: flex; align-items: center; gap: 8px; overflow-x: auto; white-space: nowrap; flex-grow: 1; min-width: 0; padding-bottom: 2px; -webkit-overflow-scrolling: touch; overscroll-behavior-x: none;">
+                        <div style="display: flex; align-items: center; gap: 8px; overflow-x: auto; white-space: nowrap; flex-grow: 1; min-width: 0; -bottom: 2px; -webkit-overflow-scrolling: touch; overscroll-behavior-x: none;">
             `;
             
             contextLayers.forEach((ctx, idx) => {
@@ -953,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             html += `
                 <div style="display: flex; gap: 6px; flex-grow: 1; min-height: 0; height: 0; overflow: hidden;">
-                    <div style="display: flex; flex-direction: column; gap: 3px; width: 110px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid #e1e1e1; padding-right: 4px; overscroll-behavior-y: none; -webkit-overflow-scrolling: touch;">
+                    <div style="display: flex; flex-direction: column; gap: 3px; width: 110px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid #e1e1e1; -right: 4px; overscroll-behavior-y: none; -webkit-overflow-scrolling: touch;">
                         <div class="sub-section-title" style="font-size:11px; margin-bottom:2px;">Tematiche</div>
             `;
 
@@ -961,7 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const catColor = getTavoloColor(tavolo);
                 const isActive = (tavolo === currentActiveTab);
                 const activeStyle = isActive ? `background:${catColor}; color:${['#f1c40f'].includes(catColor) ? '#333' : 'white'}; border-color:${catColor};` : 'background:#f1f2f6; color:#57606f;';
-                html += `<button class="sidebar-tab-btn" data-tavolo-name="${tavolo}" style="font-size:10px; padding:3px 4px; border-radius:4px; border:1px solid #dcdde1; text-align:left; cursor:pointer; font-weight:bold; ${activeStyle}">${tavolo.toUpperCase()}</button>`;
+                html += `<button class="sidebar-tab-btn" data-tavolo-name="${tavolo}" style="font-size:10px; :3px 4px; border-radius:4px; border:1px solid #dcdde1; text-align:left; cursor:pointer; font-weight:bold; ${activeStyle}">${tavolo.toUpperCase()}</button>`;
             });
 
             html += `</div><div style="display: flex; flex-direction: column; flex-grow: 1; min-width: 0; height: 100%; overflow: hidden;">`;
@@ -970,13 +970,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const items = atlasCategories[currentActiveTab];
                 html += `
                     <div class="sub-section-title" style="font-size:11px; margin-bottom:4px; flex-shrink:0;">Elementi mappati: ${items.length}</div>
-                    <div style="flex-grow: 1; min-height: 0; height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; padding-right: 2px; overscroll-behavior-y: none; -webkit-overflow-scrolling: touch;">
+                    <div style="flex-grow: 1; min-height: 0; height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; -right: 2px; overscroll-behavior-y: none; -webkit-overflow-scrolling: touch;">
                 `;
                 items.forEach((item, globalIdx) => {
                     html += `
-                        <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:4px; flex-shrink:0;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; :2px 4px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:4px; flex-shrink:0;">
                             <span style="font-size:11px; color:#333; flex-grow:1; margin-right:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${item.name}</span>
-                            <button class="vola-btn" data-tavolo="${currentActiveTab}" data-index="${globalIdx}" style="font-size:10px; padding:2px 5px; cursor:pointer; background:white; border:1px solid #333; border-radius:3px; flex-shrink:0;">🔍</button>
+                            <button class="vola-btn" data-tavolo="${currentActiveTab}" data-index="${globalIdx}" style="font-size:10px; :2px 5px; cursor:pointer; background:white; border:1px solid #333; border-radius:3px; flex-shrink:0;">🔍</button>
                         </div>
                     `;
                 });
@@ -1006,14 +1006,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 ">
                     <b style="font-size:12px; color:#2c3e50;">🗂️ Centro di Controllo</b>
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <span style="font-size:14px; font-weight:bold; color:#3498db; padding:0 4px;">${arrowSymbol}</span>
+                        <span style="font-size:14px; font-weight:bold; color:#3498db; :0 4px;">${arrowSymbol}</span>
                     </div>
                 </div>
                 <div class="desktop-main-container">
             `;
 
             html += `
-                <div style="display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #e1e1e1; padding-bottom: 6px; flex-shrink: 0; width: 100%; box-sizing: border-box;">
+                <div style="display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #e1e1e1; -bottom: 6px; flex-shrink: 0; width: 100%; box-sizing: border-box;">
                     <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
                         <span class="sub-section-title" style="margin:0;">Base Map:</span>
                         <label style="display:inline-flex; align-items:center; gap:3px; cursor:pointer;">
@@ -1028,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div style="display: flex; align-items: center; gap: 8px; flex-grow: 1; min-width: 0;">
                         <span class="sub-section-title" style="margin:0; flex-shrink:0;">Altro:</span>
-                        <div style="display: flex; align-items: center; gap: 12px; overflow-x: auto; white-space: nowrap; flex-grow: 1; min-width: 0; padding-bottom: 2px; overscroll-behavior-x: none;">
+                        <div style="display: flex; align-items: center; gap: 12px; overflow-x: auto; white-space: nowrap; flex-grow: 1; min-width: 0; -bottom: 2px; overscroll-behavior-x: none;">
             `;
             contextLayers.forEach((ctx, idx) => {
                 const isChecked = map.hasLayer(ctx.layer);
@@ -1038,7 +1038,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             html += `
                 <div style="display: flex; gap: 10px; flex-grow: 1; min-height: 0; height: 0; overflow: hidden;">
-                    <div style="display: flex; flex-direction: column; gap: 3px; width: 160px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid #e1e1e1; padding-right: 8px; overscroll-behavior-y: none;">
+                    <div style="display: flex; flex-direction: column; gap: 3px; width: 160px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid #e1e1e1; -right: 8px; overscroll-behavior-y: none;">
                         <div class="sub-section-title">Tematiche</div>
             `;
 
@@ -1074,9 +1074,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     colItems.forEach((item) => {
                         const globalIdx = items.indexOf(item);
                         html += `
-                            <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 5px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:4px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; :2px 5px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:4px;">
                                 <span style="font-size:13px; color:#333; flex-grow:1; margin-right:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${item.name}">${item.name}</span>
-                                <button class="vola-btn" data-tavolo="${tavolo}" data-index="${globalIdx}" style="font-size:10px; padding:2px 4px; cursor:pointer; background:white; border:1px solid #333; border-radius:3px; flex-shrink:0;">🔍</button>
+                                <button class="vola-btn" data-tavolo="${tavolo}" data-index="${globalIdx}" style="font-size:10px; :2px 4px; cursor:pointer; background:white; border:1px solid #333; border-radius:3px; flex-shrink:0;">🔍</button>
                             </div>
                         `;
                     });
@@ -1160,7 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [50, 50],
-                            paddingBottomRight: [50, 180],
+                            paddingBottomRight: [50, 200],
                             maxZoom: 19,
                             animate: false
                         });
