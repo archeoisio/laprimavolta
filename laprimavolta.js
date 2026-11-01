@@ -29,6 +29,21 @@ customStyleTag.innerHTML = `
         padding: 0 !important;
     }
 
+/* Stile per il logo sulla mappa */
+    .map-logo-container {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-top: 10px !important;  /* Distanza dal bordo superiore */
+        margin-right: 10px !important;
+    }
+
+    #map-custom-logo {
+        width: 110px; /* Puoi aumentare o diminuire i pixel a seconda di come preferisci la grandezza */
+        height: auto;
+        display: block;
+    }
     * {
         touch-action: manipulation;
         box-sizing: border-box;
@@ -584,6 +599,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     map.on('zoomend', checkZoomVisibility);
 
+      const LogoControl = L.Control.extend({
+        options: {
+            position: 'topright' // Puoi metterlo in 'topright', 'bottomleft', ecc.
+        },
+        onAdd: function (map) {
+            const container = L.DomUtil.create('div', 'map-logo-container');
+            
+            // Percorso corretto del logo nella cartella data
+            container.innerHTML = `
+                <img src="data/Laprimavolta.png" alt="Logo La Prima Volta" id="map-custom-logo" />
+            `;
+            
+            // Impedisce che i click sul logo muovano la mappa sottostante
+            L.DomEvent.disableClickPropagation(container);
+            
+            return container;
+        }
+    });
+
+    // Aggiunge il logo alla mappa
+    map.addControl(new LogoControl());
     map.createPane('pane_confini_amministrativi');
     map.getPane('pane_confini_amministrativi').style.zIndex = 404;
 
