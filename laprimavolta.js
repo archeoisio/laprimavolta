@@ -1285,7 +1285,7 @@ document.addEventListener('DOMContentLoaded', () => {
               .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)"); // Senza .openPopup automatico
             
             // Centriamo la mappa sulla posizione trovata con uno zoom adeguato
-            map.setView(e.latlng, 15);
+            map.setView(e.latlng, 18);
         }
     });
 
