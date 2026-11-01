@@ -91,7 +91,7 @@ customStyleTag.innerHTML = `
     @media (min-width: 768px) {
         #custom-bottom-panel {
             position: fixed;
-            top: 20px;
+            top: 0px;
             left: 0px; 
             bottom: auto;
             transform: none;
@@ -179,7 +179,7 @@ customStyleTag.innerHTML = `
 
         #feature-detail-panel {
             position: fixed !important;
-            top: 280px !important; 
+            top: 260px !important; 
             left: 0px !important; 
             width: 500px !important;
             min-height: 230px !important;
