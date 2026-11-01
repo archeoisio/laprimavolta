@@ -873,7 +873,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function executeSearch() {
+   function executeSearch() {
         const query = document.getElementById('search-input').value.trim();
         if (!query) return;
 
@@ -888,7 +888,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const lon = parseFloat(data[0].lon);
                     const displayName = data[0].display_name;
 
-                    map.setView([lat, lon], 18, { animate: true });
+                    // Centratura coerente con offset (evita che il pannello copra il marker)
+                    map.setView([lat, lon], 18, { animate: false });
+                    if (window.innerWidth < 768) {
+                        map.panBy([0, 150], { animate: false });
+                    } else {
+                        map.panBy([-300, 0], { animate: false });
+                    }
 
                     if (searchMarker) {
                         map.removeLayer(searchMarker);
@@ -1256,38 +1262,47 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', setVh);
 
    map.on('locationfound', function(e) {
-        var radius = e.accuracy / 2;
+    var radius = e.accuracy / 2;
+    
+    // Se l'accuratezza è pessima (es. da desktop/IP con raggio enorme), evitiamo il cerchio gigante
+    if (e.accuracy > 30000) {
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("Posizione approssimativa stimata da rete").openPopup();
         
-        // Se l'accuratezza è pessima (es. da desktop/IP con raggio enorme), evitiamo il cerchio gigante
-        if (e.accuracy > 30000) {
-            L.marker(e.latlng).addTo(map)
-                .bindPopup("Posizione approssimativa stimata da rete").openPopup();
+        map.setView(e.latlng, 16, { animate: false });
+        if (window.innerWidth < 768) {
+            map.panBy([0, 150], { animate: false });
         } else {
-            // --- EFFETTO PUNTO AZZURRO STILE GOOGLE ---
-            
-            // 1. Il cerchio di accuratezza sfumato (trasparente)
-            L.circle(e.latlng, radius, {
-                color: '#1a73e8',      // Bordo blu Google
-                fillColor: '#1a73e8',  // Riempimento blu
-                fillOpacity: 0.15,     // Molto trasparente come l'area di precisione
-                weight: 1,
-                interactive: false     // Evita che blocchi i click sotto
-            }).addTo(map);
-
-            // 2. Il puntino centrale azzurro con bordo bianco (stile GPS)
-            L.circleMarker(e.latlng, {
-                radius: 8,             // Dimensione del puntino centrale
-                color: '#ffffff',      // Bordo bianco per staccare dalla mappa
-                fillColor: '#1a73e8',  // Colore blu Google
-                fillOpacity: 1,
-                weight: 3
-            }).addTo(map)
-              .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)"); // Senza .openPopup automatico
-            
-            // Centriamo la mappa sulla posizione trovata con uno zoom adeguato
-            map.setView(e.latlng, 18);
+            map.panBy([-300, 0], { animate: false });
         }
-    });
+    } else {
+        // --- EFFETTO PUNTO AZZURRO STILE GOOGLE ---
+        L.circle(e.latlng, radius, {
+            color: '#1a73e8',      
+            fillColor: '#1a73e8',  
+            fillOpacity: 0.15,     
+            weight: 1,
+            interactive: false     
+        }).addTo(map);
+
+        L.circleMarker(e.latlng, {
+            radius: 8,             
+            color: '#ffffff',      
+            fillColor: '#1a73e8',  
+            fillOpacity: 1,
+            weight: 3
+        }).addTo(map)
+          .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)");
+        
+        // Centriamo la mappa direttamente a zoom 18 con l'offset corretto (come la ricerca)
+        map.setView(e.latlng, 18, { animate: false });
+        if (window.innerWidth < 768) {
+            map.panBy([0, 150], { animate: false }); // Sposta in alto su mobile
+        } else {
+            map.panBy([-300, 0], { animate: false }); // Sposta a destra su desktop
+        }
+    }
+});
 
     map.on('locationerror', function(e) { 
         alert("Impossibile determinare la posizione: " + e.message); 
@@ -1360,7 +1375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 'btn-tutorial-home');
 
         // Pulsante Posizione 📍
-        createBtn('📍', "Posizione", () => { map.locate({setView: true, maxZoom: 16}); }, 'btn-tutorial-locate');
+        createBtn('📍', "Posizione", () => { map.locate(); }, 'btn-tutorial-locate');
 
         // Pulsante Cerca 🔍
         createBtn('🔍', "Cerca indirizzo a Salerno", () => {
