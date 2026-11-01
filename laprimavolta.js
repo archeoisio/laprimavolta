@@ -340,6 +340,7 @@ customStyleTag.innerHTML = `
     /* Adattamento automatico per schermi stretti (Mobile) */
     @media (max-width: 480px) {
         #search-box-container {
+            height: 36px;
             width: auto;
             justify-content: space-between;
         }
