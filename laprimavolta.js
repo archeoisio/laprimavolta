@@ -1280,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: '#ffffff',      // Bordo bianco per staccare dalla mappa
             fillColor: '#1a73e8',  // Colore blu Google
             fillOpacity: 1,
-            weight: 3              توافق
+            weight: 3              // <-- Rimosso il carattere anomalo qui
         }).addTo(map)
           .bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)").openPopup();
         
