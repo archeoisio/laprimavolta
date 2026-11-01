@@ -96,7 +96,7 @@ customStyleTag.innerHTML = `
     @media (min-width: 768px) {
         #custom-bottom-panel {
             position: fixed;
-            top: 36px;
+            top: 37px;
             left: 0px; 
             bottom: auto;
             transform: none;
@@ -118,7 +118,7 @@ customStyleTag.innerHTML = `
 
         #custom-bottom-panel:not(.open) {
             position: fixed !important;
-            top: 36px !important;
+            top: 37px !important;
             left: 0px !important;
             bottom: auto !important;
             transform: none !important;
@@ -184,7 +184,7 @@ customStyleTag.innerHTML = `
 
         #feature-detail-panel {
             position: fixed !important;
-            top: 296px !important; 
+            top: 297px !important; 
             left: 0px !important; 
             width: 500px !important;
             min-height: 230px !important;
@@ -295,7 +295,9 @@ customStyleTag.innerHTML = `
     #search-box-container {
         position: fixed;
         top: 0px;
-        left: 108px; /* Si posiziona subito dopo i bottoni in alto a sinistra */
+        left: 110px; /* Si posiziona subito dopo i bottoni in alto a sinistra */
+        height: 36px;          /* <--- Forza l'altezza precisa a 36px */
+        box-sizing: border-box;
         background: white;
         padding: 4px 8px;
         border-radius: 6px;
