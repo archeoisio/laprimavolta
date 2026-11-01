@@ -113,7 +113,7 @@ customStyleTag.innerHTML = `
 
         #custom-bottom-panel:not(.open) {
             position: fixed !important;
-            top: 0px !important;
+            top: 20px !important;
             left: 0px !important;
             bottom: auto !important;
             transform: none !important;
@@ -841,10 +841,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    window.renderPanelContent = function() {
+   window.renderPanelContent = function() {
         const isOpen = bottomPanel.classList.contains('open');
-        const arrowSymbol = isOpen ? '▼' : '▲';
         const checkMobile = window.innerWidth < 768;
+
+        // Logica frecce esatta:
+        // - Mobile: Chiuso = ▲ (punta in su), Aperto = ▼ (punta in giù)
+        // - Desktop: Chiuso = ▼ (punta in giù), Aperto = ▲ (punta in su)
+        let arrowSymbol;
+        if (checkMobile) {
+            arrowSymbol = isOpen ? '▼' : '▲';
+        } else {
+            arrowSymbol = isOpen ? '▲' : '▼';
+        }
 
         let html = `
             <div class="panel-main-header" onclick="
@@ -1143,114 +1152,97 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
     };
-window.renderPanelContent = function() {
-        const isOpen = bottomPanel.classList.contains('open');
-        const checkMobile = window.innerWidth < 768;
 
-        // Logica frecce:
-        // - Su Mobile: Chiuso = ▲ (punta in su), Aperto = ▼ (punta in giù)
-        // - Su Desktop: Chiuso = ▼ (punta in giù), Aperto = ▲ (punta in su)
-        let arrowSymbol;
-        if (checkMobile) {
-            arrowSymbol = isOpen ? '▼' : '▲';
-        } else {
-            arrowSymbol = isOpen ? '▲' : '▼';
-        }
+    renderPanelContent();
 
-        // Generazione delle tab...
-        let tabButtonsHtml = '';
-        let tabContentsHtml = '';
-        
-        const catNames = Object.keys(window.atlasCategories || {});
-        if (!currentActiveTab && catNames.length > 0) {
-            currentActiveTab = catNames[0];
-        }
+    function setVh() {
+        const mapEl = document.getElementById('map');
+        if (!mapEl || !map) return;
+        const runResize = () => {
+            mapEl.style.width = window.innerWidth + 'px';
+            mapEl.style.height = window.innerHeight + 'px';
+            map.invalidateSize({ animate: false });
+        };
+        runResize();
+        setTimeout(runResize, 100);
+        setTimeout(runResize, 500);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
 
-        catNames.forEach(cat => {
-            const isActive = (cat === currentActiveTab);
-            const catColor = getTavoloColor(cat);
-            tabButtonsHtml += `
-                <button class="sidebar-tab-btn ${isActive ? 'active' : ''}" onclick="window.switchTab('${cat}')" style="border-left: 3px solid ${catColor};">
-                    ${cat} (${window.atlasCategories[cat].length})
-                </button>
-            `;
+    map.on('locationfound', function(e) {
+        var radius = e.accuracy / 2;
+        L.marker(e.latlng).addTo(map).bindPopup("Ti trovi qui (entro " + Math.round(radius) + " metri)").openPopup();
+        L.circle(e.latlng, radius).addTo(map);
+    });
+    map.on('locationerror', function(e) { alert("Impossibile determinare la posizione: " + e.message); });
 
-            let itemsHtml = '<div class="panel-scrollable-grid">';
-            const items = window.atlasCategories[cat];
-            let currentColumnItems = [];
-            
-            items.forEach((item, idx) => {
-                currentColumnItems.push(item);
-                if (currentColumnItems.length === 4 || idx === items.length - 1) {
-                    itemsHtml += `<div class="feature-vertical-column">`;
-                    currentColumnItems.forEach(subItem => {
-                        itemsHtml += `
-                            <div style="display:flex; align-items:center; background:#f8f9fa; border:1px solid #e1e1e1; border-radius:4px; padding:3px 6px; cursor:pointer;" onclick="showFeatureDetailsOnly(window.atlasCategories['${cat}'].find(i => i.name === \`${subItem.name.replace(/`/g, '\\`')}\`).layer, '${cat}');">
-                                <span style="font-size:12px; color:#333; flex-grow:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${subItem.name}">${subItem.name}</span>
-                            </div>
-                        `;
-                    });
-                    itemsHtml += `</div>`;
-                    currentColumnItems = [];
-                }
-            });
-            itemsHtml += `</div>`;
+    const btnControl = L.control({ position: 'topright' });
+    btnControl.onAdd = function(map) {
+        const container = L.DomUtil.create('div', 'leaflet-bar');
+        container.style.marginTop = '0px'; container.style.marginRight = '0px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
+        L.DomEvent.disableClickPropagation(container);
+        L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
+        L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
+        L.DomEvent.on(container, 'pointerdown', L.DomEvent.stopPropagation);
 
-            tabContentsHtml += `
-                <div class="sidebar-tab-content ${isActive ? 'active' : ''}" id="tab-content-${cat}">
-                    ${itemsHtml}
-                </div>
-            `;
-        });
+        const createBtn = (html, title, onClick, className) => {
+            const btn = L.DomUtil.create('a', className || '', container);
+            btn.innerHTML = html; btn.title = title; btn.href = '#'; btn.style.width = '30px'; btn.style.height = '30x'; btn.style.lineHeight = '30px'; btn.style.textAlign = 'center'; btn.style.display = 'flex'; btn.style.alignItems = 'center'; btn.style.justifyContent = 'center'; btn.style.fontSize = '18px'; btn.style.backgroundColor = 'white'; btn.style.color = '#333'; btn.style.borderBottom = '1px solid #ccc'; btn.style.textDecoration = 'none';
+            L.DomEvent.on(btn, 'click', e => { L.DomEvent.stopPropagation(e); L.DomEvent.preventDefault(e); onClick(); });
+            return btn;
+        };
 
-        if (checkMobile) {
-            // Struttura Mobile
-            bottomPanel.innerHTML = `
-                <div class="panel-main-header" onclick="
-                    const panel = document.getElementById('custom-bottom-panel');
-                    panel.classList.toggle('open');
-                    renderPanelContent();
-                ">
-                    <b style="font-size:12px; color:#2c3e50;">🗂️ Centro di Controllo</b>
-                    <span style="font-size:12px;">${arrowSymbol}</span>
-                </div>
-                <div class="mobile-content-container" style="display:flex; flex-direction:column; flex-grow:1; overflow:hidden;">
-                    <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:4px;">
-                        ${tabButtonsHtml}
-                    </div>
-                    <div style="flex-grow:1; overflow:hidden; display:flex; flex-direction:column;">
-                        ${tabContentsHtml}
-                    </div>
-                </div>
-            `;
-        } else {
-            // Struttura Desktop
-            bottomPanel.innerHTML = `
-                <div class="panel-main-header" onclick="
-                    const panel = document.getElementById('custom-bottom-panel');
-                    const willBeOpen = !panel.classList.contains('open');
-                    panel.classList.toggle('open');
-                    renderPanelContent();
-                    setTimeout(() => {
-                        map.invalidateSize({animate: true});
-                        if (willBeOpen) {
-                            map.panBy([-350, 0], {animate: true});
-                        } else {
-                            map.panBy([350, 0], {animate: true});
-                        }
-                    }, 50);
-                ">
-                    <b style="font-size:14px; color:#2c3e50;">🗂️ Centro di Controllo</b>
-                    <span style="font-size:12px;">${arrowSymbol}</span>
-                </div>
-                <div class="desktop-main-container">
-                    <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px;">
-                        ${tabButtonsHtml}
-                    </div>
-                    <div style="flex-grow:1; overflow:hidden; display:flex; flex-direction:column;">
-                        ${tabContentsHtml}
-                    </div>
-                </div>
-            `;
-        }
+       // Pulsante Home 🌍
+        createBtn('🌍', "Torna alla vista iniziale", () => {
+            // Chiude il Centro di Controllo (rimuovendo la classe 'open')
+            const bottomPanel = document.getElementById('custom-bottom-panel');
+            if (bottomPanel) bottomPanel.classList.remove('open');
+
+            // Chiude il pannello dei dettagli elemento
+            const detailPanel = document.getElementById('feature-detail-panel');
+            if (detailPanel) detailPanel.style.display = 'none';
+
+            // Deseleziona il layer attivo e ripristina lo stile se c'è una selezione
+            if (selectedLayer) {
+                resetFeatureStyle({ target: selectedLayer });
+                selectedLayer = null;
+            }
+            if (map) map.closePopup();
+
+            // Esegue il reset delle dimensioni della mappa e torna alla vista iniziale identica all'avvio
+            const isMobileDevice = window.innerWidth < 768;
+            if (isMobileDevice) {
+                map.setView([40.630, 14.805], 11.75, { animate: true });
+            } else {
+                map.fitBounds(initialBounds, { animate: true });
+            }
+
+            // Aggiorna lo stato del pannello di controllo se necessario
+            if (typeof renderPanelContent === 'function') {
+                renderPanelContent();
+            }
+        }, 'btn-tutorial-home');
+
+        createBtn('📍', "Posizione", () => { map.locate({setView: true, maxZoom: 16}); }, 'btn-tutorial-locate');
+
+        createBtn('🔍', "Cerca indirizzo a Salerno", () => {
+            const box = document.getElementById('search-box-container');
+            if (box.style.display === 'flex') {
+                box.style.display = 'none';
+            } else {
+                box.style.display = 'flex';
+                document.getElementById('search-input').focus();
+            }
+        }, 'btn-tutorial-search');
+
+        return container;
     };
+    btnControl.addTo(map);
+
+    L.DomEvent.disableClickPropagation(bottomPanel);
+    L.DomEvent.disableScrollPropagation(bottomPanel);
+    L.DomEvent.on(bottomPanel, 'mousewheel touchstart pointerdown', (e) => {
+        L.DomEvent.stopPropagation(e);
+    });
+});
