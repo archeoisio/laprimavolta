@@ -641,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
         style: function(feature) {
             return { 
                 color: '#000000',      
-                weight: 1.5,           
+                weight: 1,           
                 fill: true,            
                 fillColor: '#b2bec3',  
                 fillOpacity: 0.0       
