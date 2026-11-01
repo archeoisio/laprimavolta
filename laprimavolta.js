@@ -35,15 +35,26 @@ customStyleTag.innerHTML = `
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
-        margin-top: 10px !important;  /* Distanza dal bordo superiore */
-        margin-right: 10px !important;
+        margin-top: 1px !important;  /* Distanza dal bordo superiore */
+        margin-right: 1px !important;
     }
 
     #map-custom-logo {
         width: 110px; /* Puoi aumentare o diminuire i pixel a seconda di come preferisci la grandezza */
         height: auto;
         display: block;
-        border: 1px solid #000000;
+        border: none;
+    }
+    @media (max-width: 768px) {
+        #map-custom-logo {
+            width: 50px;  /* Dimensione più compatta su smartphone */
+            height: 50px;
+        }
+        
+        .map-logo-container {
+            margin-top: 1px !important;    /* Margini leggermente ridotti su mobile */
+            margin-right: 1px !important;
+        }
     }
     * {
         touch-action: manipulation;
