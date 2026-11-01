@@ -47,7 +47,12 @@ customStyleTag.innerHTML = `
     .leaflet-interactive {
         transition: none !important;
     }
-
+   .leaflet-top.leaflet-left .leaflet-control {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+    }
     /* ==================== STILE MOBILE ==================== */
     #custom-bottom-panel { 
         position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); 
@@ -91,7 +96,7 @@ customStyleTag.innerHTML = `
     @media (min-width: 768px) {
         #custom-bottom-panel {
             position: fixed;
-            top: 0px;
+            top: 33px;
             left: 0px; 
             bottom: auto;
             transform: none;
@@ -113,7 +118,7 @@ customStyleTag.innerHTML = `
 
         #custom-bottom-panel:not(.open) {
             position: fixed !important;
-            top: 0px !important;
+            top: 33px !important;
             left: 0px !important;
             bottom: auto !important;
             transform: none !important;
@@ -179,7 +184,7 @@ customStyleTag.innerHTML = `
 
         #feature-detail-panel {
             position: fixed !important;
-            top: 260px !important; 
+            top: 293px !important; 
             left: 0px !important; 
             width: 500px !important;
             min-height: 230px !important;
@@ -290,7 +295,7 @@ customStyleTag.innerHTML = `
     #search-box-container {
         position: fixed;
         top: 0px;
-        right: 0x;
+        left: 100px;
         background: white;
         padding: 6px 10px;
         border-radius: 8px;
@@ -1177,10 +1182,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     map.on('locationerror', function(e) { alert("Impossibile determinare la posizione: " + e.message); });
 
-    const btnControl = L.control({ position: 'topright' });
+    const btnControl = L.control({ position: 'topleft' });
     btnControl.onAdd = function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar');
-        container.style.marginTop = '0px'; container.style.marginRight = '0px'; container.style.display = 'flex'; container.style.flexDirection = 'column'; container.style.background = 'transparent'; container.style.border = 'none';
+        container.style.marginTop = '0px'; container.style.marginRight = '0px'; container.style.display = 'flex'; container.style.flexDirection = 'row'; container.style.background = 'transparent'; container.style.border = 'none';
         L.DomEvent.disableClickPropagation(container);
         L.DomEvent.on(container, 'mousewheel', L.DomEvent.stopPropagation);
         L.DomEvent.on(container, 'touchstart', L.DomEvent.stopPropagation);
