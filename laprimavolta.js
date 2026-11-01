@@ -43,6 +43,7 @@ customStyleTag.innerHTML = `
         width: 110px; /* Puoi aumentare o diminuire i pixel a seconda di come preferisci la grandezza */
         height: auto;
         display: block;
+        border: 1px solid #000000;
     }
     * {
         touch-action: manipulation;
