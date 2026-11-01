@@ -301,7 +301,7 @@ customStyleTag.innerHTML = `
         background: white;
         padding: 4px 8px;
         border-radius: 6px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        box-shadow: none;
         z-index: 3000;
         display: none;
         align-items: center;
