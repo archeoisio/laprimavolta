@@ -620,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Percorso corretto del logo nella cartella data
             container.innerHTML = `
-                <img src="data/Laprimavolta.png" alt="Logo La Prima Volta" id="map-custom-logo" />
+                <img src="map/data/Laprimavolta.png" alt="Logo La Prima Volta" id="map-custom-logo" />
             `;
             
             // Impedisce che i click sul logo muovano la mappa sottostante
@@ -649,7 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    fetch('data/confiniamministrativi.geojson')
+    fetch('map/data/confiniamministrativi.geojson')
        .then(response => response.json())
        .then(data => {
            layer_confini_amministrativi.addData(data);
@@ -671,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedComuneLayer = null; 
     let currentLabelMarker = null;  
 
-    fetch('data/comuniprovincia.geojson')
+    fetch('map/data/comuniprovincia.geojson')
        .then(response => response.json())
        .then(data => {
             const geoJsonLayer = L.geoJson(data, {
