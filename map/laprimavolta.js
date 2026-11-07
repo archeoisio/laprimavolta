@@ -1207,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (checkMobile) {
                         map.fitBounds(bounds, {
                             paddingTopLeft: [20, 20],
-                            paddingBottomRight: [20, 280],
+                            paddingBottomRight: [20, 300],
                             maxZoom: 19,
                             animate: false
                         });
